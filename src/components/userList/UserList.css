@@ -1,0 +1,28 @@
+.list-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.action-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 25px;
+}
+
+.action-bar-left {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.action-bar-right {
+  display: flex;
+  flex-direction: row;
+}
+
+.list {
+  border: 1px solid black;
+  margin: 10px;
+  overflow-y: auto;
+}

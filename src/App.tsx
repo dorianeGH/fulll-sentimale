@@ -1,13 +1,13 @@
 import "./App.css";
-import Header from "./components/Header";
-import Search from "./components/Search";
-import UserList from "./components/UserList";
+import Header from "./components/header/Header";
+import Search from "./components/search/Search";
+import UserList from "./components/userList/UserList";
 import { UserContextProvider } from "./contexts/UserContext";
 
 function App() {
   return (
     <UserContextProvider>
-      <div className='App'>
+      <div className='body'>
         <Header />
         <Search />
         <UserList />
