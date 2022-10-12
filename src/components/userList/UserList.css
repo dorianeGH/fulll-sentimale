@@ -34,7 +34,7 @@
   overflow-y: auto;
 }
 .card {
-  background-color: red;
+  background-color: var(--lighter-grey);
   padding: 1rem;
   border: 1px solid white;
   border-radius: 0.25rem;
@@ -42,7 +42,7 @@
 }
 .card.card-shadow {
   border: none;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.8);
+  box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.8);
 }
 .card-avatar {
   margin-bottom: 0.5rem;
@@ -71,11 +71,12 @@
 .btn {
   background: hsl(200, 50%, 50%);
   font-size: var(--font-size);
-  color: yellow;
+  color: var(--darker-grey);
   border: none;
-  padding: 0.25em 0.75em;
+  padding: 0.6em 0.75em;
   border-radius: 0.25em;
   cursor: pointer;
+  width: 80%;
 }
 .btn:hover,
 btn:focus {
