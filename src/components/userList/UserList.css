@@ -17,9 +17,21 @@
   flex-direction: row;
   justify-content: space-between;
 }
+.action-bar-left > input {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 15px;
+  width: 20px;
+}
 .action-bar-right {
   display: flex;
   flex-direction: row;
+}
+.action-bar-right > img {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
 }
 
 .list {

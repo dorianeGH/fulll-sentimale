@@ -1,21 +1,47 @@
-import { createContext, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 interface Props {
-  query: any;
-  setQuery: any;
-  searchResults: any;
-  setSearchResults: any;
+  query: string;
+  setQuery: Dispatch<SetStateAction<string>>;
+  searchResults: [];
+  setSearchResults: Dispatch<SetStateAction<[]>>;
+  errors: string;
 }
 export const UserContext = createContext<Props>({} as any);
 export const UserContextProvider = ({ children }: any) => {
   const [query, setQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<[]>([]);
+  const [errors, setErrors] = useState("");
+
+  const getUser = async () => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+    fetch(`https://api.github.com/search/users?q="${query}"`, { signal })
+      .then((res) => res.json())
+      .then((data) => {
+        setSearchResults(data.items);
+      })
+      .catch((err) => {
+        if (err.name === "AbortError") {
+          console.log("resquest cancelled");
+        } else {
+          setErrors("autre erreur");
+        }
+      });
+    // alert("this is the alert");
+
+    return () => {
+      controller.abort();
+    };
+  };
 
   useEffect(() => {
-    if (query !== "") {
-      fetch(`https://api.github.com/search/users?q="${query}"`)
-        .then((res) => res.json())
-        .then((data) => setSearchResults(data.items));
-    }
+    getUser();
   }, [query]);
 
   useEffect(() => console.log("searchResults", searchResults), [searchResults]);
@@ -25,6 +51,7 @@ export const UserContextProvider = ({ children }: any) => {
     setQuery,
     searchResults,
     setSearchResults,
+    errors,
   };
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
