@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
 import "./UserList.css";
 
 const UserList = () => {
   const [users, setUsers] = useState(false);
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [error, setSerror] = useState("no res");
+  const { searchResults } = useContext(UserContext);
 
   return (
     <div className='list-container'>
@@ -21,231 +23,18 @@ const UserList = () => {
         </div>
       </div>
       <div className='list'>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
+        {searchResults.map((user: any) => (
+          <div className='card card-shadow'>
+            <div className='card-avatar'>
+              <img src={user.avatar_url} alt='avatar' />
+            </div>
+            <div className='card-body'>{user.id}</div>
+            <div className='card-body'>{user.login}</div>
+            <div className='card-footer'>
+              <button className='btn'>View profile</button>
+            </div>
           </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
-        <div className='card card-shadow'>
-          <div className='card-avatar'>
-            <img src='https://unsplash.com/photos/mEZ3PoFGs_k' alt='avatar' />
-          </div>
-          <div className='card-body'>ID Login</div>
-          <div className='card-footer'>
-            <button className='btn'>View profile</button>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

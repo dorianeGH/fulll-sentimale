@@ -1,12 +1,19 @@
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 import "./Search.css";
 
 const Search = () => {
-  //input container=inwrap
-  //input
+  const { query, setQuery } = useContext(UserContext);
   return (
     <form className='input-container'>
       <label className='label'>Search</label>
-      <input type='text' className='input' id='search' />
+      <input
+        type='text'
+        className='input'
+        id='search'
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
     </form>
   );
 };
