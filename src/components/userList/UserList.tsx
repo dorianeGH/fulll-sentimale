@@ -1,15 +1,30 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
-import Card from "../card/Card";
+import Card, { User } from "../card/Card";
 import "./UserList.css";
 
 const UserList = () => {
   const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
-  const { searchResults, errors } = useContext(UserContext);
+  const { searchResults, setSearchResults, errors } = useContext(UserContext);
 
+  const handleDelete = () => {
+    setSearchResults(
+      searchResults.filter((user: User) => !selectedUsers.includes(user.id))
+    );
+    setSelectedUsers(
+      searchResults.filter((user: User) => selectedUsers.includes(user.id))
+    );
+  };
   return !searchResults || errors ? (
-    <span style={{ display: "flex", justifyContent: "center", color: "red" }}>
-      {errors}
+    <span
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        color: "red",
+        margin: "0 auto",
+      }}
+    >
+      {`${errors}. Please try again in few minutes`}
     </span>
   ) : searchResults.length < 1 ? (
     <h3 style={{ display: "flex", justifyContent: "center" }}>No user found</h3>
@@ -33,7 +48,7 @@ const UserList = () => {
               src='https://cdn-icons-png.flaticon.com/512/1214/1214428.png'
               alt='delete'
               style={{ marginLeft: "10px" }}
-              /* onClick={handleDelete} */
+              onClick={handleDelete}
             />
           </div>
         </div>

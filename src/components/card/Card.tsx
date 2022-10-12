@@ -12,7 +12,7 @@ interface CardProps {
   selectedUsers: number[];
   setSelectedUsers: Dispatch<SetStateAction<number[]>>;
 }
-interface User {
+export interface User {
   avatar_url: string;
   id: number;
   login: string;

@@ -5,17 +5,18 @@ import {
   useEffect,
   useState,
 } from "react";
+import { User } from "../components/card/Card";
 interface Props {
   query: string;
   setQuery: Dispatch<SetStateAction<string>>;
-  searchResults: [];
-  setSearchResults: Dispatch<SetStateAction<[]>>;
+  searchResults: User[];
+  setSearchResults: Dispatch<SetStateAction<User[]>>;
   errors: string;
 }
 export const UserContext = createContext<Props>({} as any);
 export const UserContextProvider = ({ children }: any) => {
   const [query, setQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<[]>([]);
+  const [searchResults, setSearchResults] = useState<User[]>([]);
   const [errors, setErrors] = useState("");
 
   const getUser = () => {
