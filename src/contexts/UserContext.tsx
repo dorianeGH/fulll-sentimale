@@ -12,12 +12,18 @@ interface Props {
   searchResults: User[];
   setSearchResults: Dispatch<SetStateAction<User[]>>;
   errors: string;
+  editMode: string;
 }
 export const UserContext = createContext<Props>({} as any);
 export const UserContextProvider = ({ children }: any) => {
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState<User[]>([]);
   const [errors, setErrors] = useState("");
+  const [editMode, setEditMode] = useState("on");
+
+  const toggleEditMode = () => {
+    setEditMode((prev) => (prev === "off" ? "on" : "off"));
+  };
 
   const getUser = () => {
     if (query !== "") {
@@ -59,6 +65,7 @@ export const UserContextProvider = ({ children }: any) => {
     searchResults,
     setSearchResults,
     errors,
+    editMode,
   };
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

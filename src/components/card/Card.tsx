@@ -23,7 +23,7 @@ export interface User {
 const Card = ({ selectedUsers, setSelectedUsers }: CardProps) => {
   // ischeck= selectedUsers, setIsCheck= setSelectedUsers
   //const [isSelected, setIsSelected] = useState(false);
-  const { searchResults } = useContext(UserContext);
+  const { searchResults, editMode } = useContext(UserContext);
 
   const handleClick = (e: any) => {
     const { id, checked } = e.target;
@@ -38,14 +38,16 @@ const Card = ({ selectedUsers, setSelectedUsers }: CardProps) => {
     <div className='list'>
       {searchResults.map(({ avatar_url, id, login }: User) => (
         <div className='card card-shadow'>
-          <Checkbox
-            key={id}
-            type='checkbox'
-            name={login}
-            id={id.toString()}
-            handleClick={handleClick}
-            isChecked={selectedUsers.includes(id.toString())}
-          />
+          {editMode === "on" && (
+            <Checkbox
+              key={id}
+              type='checkbox'
+              name={login}
+              id={id.toString()}
+              handleClick={handleClick}
+              isChecked={selectedUsers.includes(id.toString())}
+            />
+          )}
           <div className='card-avatar'>
             <img src={avatar_url} alt='avatar' />
           </div>
