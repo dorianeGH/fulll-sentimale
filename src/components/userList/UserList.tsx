@@ -1,18 +1,17 @@
 import { useContext, useEffect, useState } from "react";
+import { ModeContext } from "../../contexts/ModeContext";
 import { UserContext } from "../../contexts/UserContext";
 import Card, { User } from "../card/Card";
 import Checkbox from "../checkbox/Checkbox";
 import "./UserList.css";
 
 const UserList = () => {
-  const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [isSelectAll, setIsSelectAll] = useState(false);
+  const { searchResults, setSearchResults, errors } = useContext(UserContext);
+  const { editMode } = useContext(ModeContext);
 
-  const { searchResults, setSearchResults, errors, editMode } =
-    useContext(UserContext);
-  // ischeck= selectedUsers, setIsCheck= setSelectedUsers
-
-  const handleSelectAll = (e: any) => {
+  const handleSelectAll = () => {
     setIsSelectAll(!isSelectAll);
     setSelectedUsers(searchResults.map((user: User) => user.id.toString()));
     if (isSelectAll) {
@@ -20,7 +19,7 @@ const UserList = () => {
     }
   };
 
-  const handleDelete = (e: any) => {
+  const handleDelete = () => {
     setSearchResults(
       searchResults.filter(
         (user: User) => !selectedUsers.includes(user.id.toString())
@@ -29,10 +28,10 @@ const UserList = () => {
     setSelectedUsers([]);
   };
 
-  const handleDuplicate = (e: any) => {
+  const handleDuplicate = () => {
     let duplicatedUsers: any = [];
     let newId = "";
-    //genere un nouvel id pour l'attribuer ensuite
+    /* generate a newId */
     const generateId = () => {
       const generatedId = Math.floor(Math.random() * 100).toString();
       if (!selectedUsers.includes(generatedId)) {
@@ -40,7 +39,7 @@ const UserList = () => {
       }
     };
     generateId();
-    //tableau intermédiaire pour récupérer les users
+    /* get users in temp array */
     for (const el of selectedUsers) {
       if (searchResults.map((user) => user.id.toString()).includes(el)) {
         if (searchResults) {
@@ -87,7 +86,7 @@ const UserList = () => {
               <span
                 style={{ paddingLeft: "10px", color: "var(--darker-grey)" }}
               >
-                {`${selectedUsers.length}`} elements selected
+                {`- ${selectedUsers.length}`} elements selected
               </span>
             </div>
             <div className='action-bar-right'>
@@ -101,7 +100,6 @@ const UserList = () => {
                 alt='delete'
                 style={{ marginLeft: "10px" }}
                 onClick={handleDelete}
-                //onChange={handleChange}
               />
             </div>
           </div>

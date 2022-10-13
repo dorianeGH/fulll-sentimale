@@ -34,7 +34,7 @@
   text-align: center;
 }
 .btn {
-  background: hsl(200, 50%, 50%);
+  background: var(--btn-bg);
   font-size: var(--font-size);
   color: var(--darker-grey);
   border: none;
@@ -45,9 +45,9 @@
 }
 .btn:hover,
 btn:focus {
-  background: hsl(200, 50%, 60%);
+  background: var(--btn-bg);
 }
 .btn:hover,
 btn:focus {
-  background: hsl(200, 50%, 60%);
+  background: var(--btn-bg);
 }

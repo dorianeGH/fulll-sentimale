@@ -1,19 +1,12 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 import "./Card.css";
 import { UserContext } from "../../contexts/UserContext";
 import Checkbox from "../checkbox/Checkbox";
+import { ModeContext } from "../../contexts/ModeContext";
 
 interface CardProps {
-  //selectedUsers: number[];
-  selectedUsers: any;
-  setSelectedUsers: Dispatch<SetStateAction<any[]>>;
+  selectedUsers: string[];
+  setSelectedUsers: Dispatch<SetStateAction<string[]>>;
 }
 export interface User {
   avatar_url: string;
@@ -21,18 +14,16 @@ export interface User {
   login: string;
 }
 const Card = ({ selectedUsers, setSelectedUsers }: CardProps) => {
-  // ischeck= selectedUsers, setIsCheck= setSelectedUsers
-  //const [isSelected, setIsSelected] = useState(false);
-  const { searchResults, editMode } = useContext(UserContext);
+  const { searchResults } = useContext(UserContext);
+  const { editMode } = useContext(ModeContext);
 
   const handleClick = (e: any) => {
     const { id, checked } = e.target;
     setSelectedUsers([...selectedUsers, id]);
     if (!checked) {
-      setSelectedUsers(selectedUsers.filter((user: User) => user !== id));
+      setSelectedUsers(selectedUsers.filter((user) => user !== id));
     }
   };
-  useEffect(() => console.log("nouveau test", selectedUsers), [selectedUsers]);
 
   return (
     <div className='list'>

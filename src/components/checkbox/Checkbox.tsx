@@ -2,8 +2,8 @@ interface CheckboxProps {
   id: string;
   type: string;
   name: string;
-  handleClick: any;
-  isChecked: any;
+  handleClick: (e: any) => void;
+  isChecked: boolean;
 }
 const Checkbox = ({
   id,

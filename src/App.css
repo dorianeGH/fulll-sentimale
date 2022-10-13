@@ -6,6 +6,7 @@
   --light-grey: hsl(240, 10%, 80%);
   --dark-grey: hsl(240, 4%, 52%);
   --darker-grey: hsl(245, 30%, 8%);
+  --btn-bg: hsl(200, 50%, 50%);
 }
 * {
   box-sizing: border-box;

@@ -1,9 +1,11 @@
 import { useContext } from "react";
+import { ModeContext } from "../../contexts/ModeContext";
 import { UserContext } from "../../contexts/UserContext";
 import "./Search.css";
 
 const Search = () => {
   const { query, setQuery } = useContext(UserContext);
+  const { editMode, toggleEditMode } = useContext(ModeContext);
   return (
     <>
       <form className='input-container'>
@@ -16,8 +18,14 @@ const Search = () => {
           onChange={(e) => setQuery(e.target.value)}
         />
       </form>
-      <input type='checkbox' id='check' className='toggle' />
-      <label>fhhj</label>
+      <input
+        type='checkbox'
+        checked={editMode === "on"}
+        onChange={toggleEditMode}
+        id={editMode}
+        className='toggle'
+      />
+      <label className='switch'>Edit mode:{editMode}</label>
     </>
   );
 };
