@@ -18,11 +18,6 @@ const UserList = () => {
       setSelectedUsers([]);
     }
   };
-  useEffect(
-    () =>
-      console.log("selectedUsers", selectedUsers, "etisSelectAll", isSelectAll),
-    [selectedUsers, isSelectAll]
-  );
 
   const handleDelete = (e: any) => {
     setSearchResults(
@@ -32,6 +27,34 @@ const UserList = () => {
     );
     setSelectedUsers([]);
   };
+
+  const handleDuplicate = (e: any) => {
+    let duplicatedUsers: any = [];
+    let newId = "";
+    //genere un nouvel id pour l'attribuer ensuite
+    const generateId = () => {
+      const generatedId = Math.floor(Math.random() * 100).toString();
+      if (!selectedUsers.includes(generatedId)) {
+        newId = generatedId;
+      }
+    };
+    generateId();
+    //tableau intermédiaire pour récupérer les users
+    for (const el of selectedUsers) {
+      if (searchResults.map((user) => user.id.toString()).includes(el)) {
+        if (searchResults) {
+          duplicatedUsers.push({
+            ...searchResults.find((user: User) => user.id.toString() === el),
+            id: newId,
+          });
+        }
+      }
+      setSearchResults(duplicatedUsers.concat(searchResults));
+      setSelectedUsers([]);
+    }
+    duplicatedUsers = [];
+  };
+
   return !searchResults || errors ? (
     <span
       style={{
@@ -60,12 +83,14 @@ const UserList = () => {
             <span style={{ paddingLeft: "10px", color: "var(--darker-grey)" }}>
               {`${selectedUsers.length}`} elements selected
             </span>
+            <input type='checkbox' id='check' className='toggle' />
+            <label>fhhj</label>
           </div>
           <div className='action-bar-right'>
             <img
               src='https://cdn-icons-png.flaticon.com/512/3991/3991529.png'
               alt='duplicate'
-              /* onClick={handleDuplicate} */
+              onClick={handleDuplicate}
             />
             <img
               src='https://cdn-icons-png.flaticon.com/512/1214/1214428.png'
