@@ -25,14 +25,12 @@ const UserList = () => {
   );
 
   const handleDelete = (e: any) => {
-    console.log("ici", e);
-
     setSearchResults(
-      searchResults.filter((user: User) => !selectedUsers.includes(user.id))
+      searchResults.filter(
+        (user: User) => !selectedUsers.includes(user.id.toString())
+      )
     );
-    setSelectedUsers(
-      searchResults.filter((user: User) => selectedUsers.includes(user.id))
-    );
+    setSelectedUsers([]);
   };
   return !searchResults || errors ? (
     <span
