@@ -3,14 +3,17 @@ import {
   SetStateAction,
   useCallback,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import "./Card.css";
 import { UserContext } from "../../contexts/UserContext";
+import Checkbox from "../checkbox/Checkbox";
 
 interface CardProps {
-  selectedUsers: number[];
-  setSelectedUsers: Dispatch<SetStateAction<number[]>>;
+  //selectedUsers: number[];
+  selectedUsers: any;
+  setSelectedUsers: Dispatch<SetStateAction<any[]>>;
 }
 export interface User {
   avatar_url: string;
@@ -18,30 +21,31 @@ export interface User {
   login: string;
 }
 const Card = ({ selectedUsers, setSelectedUsers }: CardProps) => {
-  const [isSelected, setIsSelected] = useState(false);
+  // ischeck= selectedUsers, setIsCheck= setSelectedUsers
+  //const [isSelected, setIsSelected] = useState(false);
   const { searchResults } = useContext(UserContext);
 
-  const handleClick = useCallback(
-    (id: number) => {
-      if (!selectedUsers.includes(id)) {
-        setIsSelected(!isSelected);
-        setSelectedUsers([...selectedUsers, id]);
-        console.log("passe la ");
-      } else {
-        setIsSelected(!isSelected);
-        setSelectedUsers(
-          selectedUsers.filter((savedId: number) => savedId !== id)
-        );
-        console.log("passe ici et là ");
-      }
-    },
-    [isSelected, selectedUsers]
-  );
+  const handleClick = (e: any) => {
+    const { id, checked } = e.target;
+    setSelectedUsers([...selectedUsers, id]);
+    if (!checked) {
+      setSelectedUsers(selectedUsers.filter((user: User) => user !== id));
+    }
+  };
+  useEffect(() => console.log("nouveau test", selectedUsers), [selectedUsers]);
+
   return (
     <div className='list'>
       {searchResults.map(({ avatar_url, id, login }: User) => (
         <div className='card card-shadow'>
-          <input type='checkbox' onClick={() => handleClick(id)}></input>
+          <Checkbox
+            key={id}
+            type='checkbox'
+            name={login}
+            id={id.toString()}
+            handleClick={handleClick}
+            isChecked={selectedUsers.includes(id.toString())}
+          />
           <div className='card-avatar'>
             <img src={avatar_url} alt='avatar' />
           </div>

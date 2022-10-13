@@ -1,13 +1,32 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import Card, { User } from "../card/Card";
+import Checkbox from "../checkbox/Checkbox";
 import "./UserList.css";
 
 const UserList = () => {
   const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
-  const { searchResults, setSearchResults, errors } = useContext(UserContext);
+  const [isSelectAll, setIsSelectAll] = useState(false);
 
-  const handleDelete = () => {
+  const { searchResults, setSearchResults, errors } = useContext(UserContext);
+  // ischeck= selectedUsers, setIsCheck= setSelectedUsers
+
+  const handleSelectAll = (e: any) => {
+    setIsSelectAll(!isSelectAll);
+    setSelectedUsers(searchResults.map((user: User) => user.id.toString()));
+    if (isSelectAll) {
+      setSelectedUsers([]);
+    }
+  };
+  useEffect(
+    () =>
+      console.log("selectedUsers", selectedUsers, "etisSelectAll", isSelectAll),
+    [selectedUsers, isSelectAll]
+  );
+
+  const handleDelete = (e: any) => {
+    console.log("ici", e);
+
     setSearchResults(
       searchResults.filter((user: User) => !selectedUsers.includes(user.id))
     );
@@ -33,7 +52,13 @@ const UserList = () => {
       <div className='list-container'>
         <div className='action-bar'>
           <div className='action-bar-left'>
-            <input type='checkbox'></input>
+            <Checkbox
+              type='checkbox'
+              name='selectAll'
+              id='selectAll'
+              handleClick={handleSelectAll}
+              isChecked={isSelectAll}
+            />
             <span style={{ paddingLeft: "10px", color: "var(--darker-grey)" }}>
               {`${selectedUsers.length}`} elements selected
             </span>
@@ -49,6 +74,7 @@ const UserList = () => {
               alt='delete'
               style={{ marginLeft: "10px" }}
               onClick={handleDelete}
+              //onChange={handleChange}
             />
           </div>
         </div>
